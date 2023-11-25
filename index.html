@@ -4,99 +4,78 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="refresh" content="600" />
-    <title>Weather</title>
-    <!-- <link rel="stylesheet" type="text/css" href="./style.css" media="screen" /> -->
-    <link rel="stylesheet" href="https://use.typekit.net/tnj1fra.css" />
+    <title>Weather App</title>
 
     <style>
-      /* @tailwind base; */
-
-      /* @tailwind components; */
-
-      /* @tailwind utilities; */
-
       body {
         background: #000;
         margin: 0 !important;
         padding: 0 !important;
         overflow: hidden !important;
       }
-      body * {
-        font-family: mundial, sans-serif !important;
+      fullscreenContent,
+      iframe {
+        border: none;
+        width: 100vw;
+        height: 100vh;
       }
-
-      #ww_637db1a0d35b2 {
-        top: 50%;
-        left: 50%;
-        font-weight: 700;
-        position: absolute !important;
+      .full-screen-button {
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
         margin: 0;
-        transform: translateX(-50%) translateY(-50%);
-        background-color: #000 !important;
-        color: rgba(122, 122, 122, 0);
-        min-width: 100vw !important;
-        max-width: 100vw !important;
-        min-height: 100vh !important;
-        max-height: 100vh !important;
+        padding: 0rem;
+        border: none;
+        background: none;
       }
-
-      #ww_637db1a0d35b2 .ww-box {
-        position: absolute !important;
-        padding: 0 !important;
-        margin: 0;
-        top: 50%;
-        transform: translateY(-50%);
-      }
-
-      .ww_current * {
-        margin: 0 !important;
-      }
-
-      .ww_cond {
-        width: 100vw !important;
-        font-weight: 400 !important;
-      }
-
-      .ww_icon {
-        transform: translateY(10%) scale(100%);
-      }
-
-      .ww_source {
-        display: none !important;
-      }
-
-      #ww_637db1a0d35b2 a:link {
-        color: rgba(0, 0, 0, 0);
-      }
-
-      .ww_arr {
-        display: none !important;
-      }
-
-      .ww_line {
-        margin: 0 !important;
+      .full-screen-button svg {
+        color: white;
+        padding: 0.2rem;
+        background: black;
+        border-radius: 0.2rem;
       }
     </style>
   </head>
   <body>
-    <div
-      id="ww_637db1a0d35b2"
-      v="1.3"
-      loc="id"
-      a='{"t":"horizontal","lang":"fr","sl_lpl":1,"ids":["wl2935"],"font":"Arial","sl_ics":"one","sl_sot":"celsius","cl_bkg":"image","cl_font":"#FFFFFF","cl_cloud":"#FFFFFF","cl_persp":"#81D4FA","cl_sun":"#FFC107","cl_moon":"#FFC107","cl_thund":"#FF5722","el_nme":3,"el_phw":3,"el_whr":3}'
-    >
-      Plus de prévisions:
-      <a
-        href="https://oneweather.org/toronto/30_days/"
-        id="ww_637db1a0d35b2_u"
-        target="_blank"
-        >Weather 30 days Toronto</a
-      >
+    <div id="fullscreenContent">
+      <iframe id="weatherFrame" src="./weather/"> </iframe>
     </div>
-    <script
-      async
-      src="https://app2.weatherwidget.org/js/?id=ww_637db1a0d35b2"
-    ></script>
+    <button class="full-screen-button" title="Enter full screen mode">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        fill="currentColor"
+        class="bi bi-fullscreen"
+        viewBox="0 0 16 16"
+      >
+        <path
+          d="M1.5 1a.5.5 0 0 0-.5.5v4a.5.5 0 0 1-1 0v-4A1.5 1.5 0 0 1 1.5 0h4a.5.5 0 0 1 0 1zM10 .5a.5.5 0 0 1 .5-.5h4A1.5 1.5 0 0 1 16 1.5v4a.5.5 0 0 1-1 0v-4a.5.5 0 0 0-.5-.5h-4a.5.5 0 0 1-.5-.5M.5 10a.5.5 0 0 1 .5.5v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 0 14.5v-4a.5.5 0 0 1 .5-.5m15 0a.5.5 0 0 1 .5.5v4a1.5 1.5 0 0 1-1.5 1.5h-4a.5.5 0 0 1 0-1h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 1 .5-.5"
+        />
+      </svg>
+    </button>
+
+    <script <script>
+      const fullscreenContent = document.getElementById("fullscreenContent");
+      const fullscreenButton = document.querySelector(".full-screen-button");
+
+      fullscreenButton.addEventListener("click", function () {
+        if (fullscreenContent.webkitSupportsFullscreen) {
+          fullscreenContent.webkitEnterFullscreen();
+          return;
+        }
+
+        fullscreenContent.requestFullscreen();
+      });
+
+      document.addEventListener("fullscreenchange", function () {
+        if (document.fullscreenElement) {
+          fullscreenContent.setAttribute("controls", true);
+          return;
+        }
+
+        fullscreenContent.removeAttribute("controls");
+      });
+    </script>
   </body>
 </html>
