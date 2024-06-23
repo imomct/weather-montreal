@@ -38,7 +38,7 @@
   </head>
   <body>
     <div id="fullscreenContent">
-      <iframe id="weatherFrame" src="./weather/"> </iframe>
+      <iframe id="weatherFrame" src="./weather/" name="weatherIFrame"> </iframe>
     </div>
     <button class="full-screen-button" title="Enter full screen mode">
       <svg
@@ -76,6 +76,12 @@
 
         fullscreenContent.removeAttribute("controls");
       });
+    </script>
+    <script>
+      window.setInterval("reloadIFrame();", 10000);
+      function reloadIFrame() {
+         document.frames["weatherIFrame"].location.reload();
+      }
     </script>
   </body>
 </html>
