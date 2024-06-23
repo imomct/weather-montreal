@@ -58,7 +58,7 @@
     <script>
       window.setInterval("reloadIFrame();", 3000);
       function reloadIFrame() {
-        document.getElementById("weatherFrame").location.reload();
+        document.getElementById("weatherFrame").contentWindow.location.reload();
       }
     </script>
 
