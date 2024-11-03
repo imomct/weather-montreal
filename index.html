@@ -56,11 +56,25 @@
     </button>
 
     <script>
-      window.setInterval("reloadIFrame();", 600000);
-      function reloadIFrame() {
-        document.getElementById("weatherFrame").contentWindow.location.reload();
+      // Set the interval to check internet and reload the iframe every 10 minutes
+      window.setInterval(checkConnectionAndReload, 600000); 
+
+      function checkConnectionAndReload() {
+        // URL to check connectivity (can be any reliable server you have access to)
+        const url = "https://www.google.com/";
+
+        fetch(url, { method: 'HEAD', mode: 'no-cors' })
+          .then(() => {
+            // If fetch is successful, reload the iframe
+            document.getElementById("weatherFrame").contentWindow.location.reload();
+          })
+          .catch(() => {
+            // If there's an error, the internet is likely down
+            console.warn("Internet connection not available. Skipping iframe reload.");
+          });
       }
     </script>
+  </body>
 
     <script>
       const fullscreenContent = document.getElementById("fullscreenContent");
